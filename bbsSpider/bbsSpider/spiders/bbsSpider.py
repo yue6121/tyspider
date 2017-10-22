@@ -19,24 +19,25 @@ class bbsSpider(scrapy.spiders.Spider):
         url = response.url #爬取时请求的url
         if(response.status!=200):
             return
-        if(re.match('http://ty.netease.com/forum-\d-\d.html$',url) is not None or url=='http://ty.netease.com'):
+        if(re.match('http://ty.netease.com/forum-\d+-\d+.html$',url) is not None or url=='http://ty.netease.com'):
             hxs = HtmlXPathSelector(response)
             urls = hxs.xpath('//a/@href').extract()
             for url in urls:
                 url_new = ''
-                if(re.match('//ty.netease.com/forum-\d-\d.html$',url) is not None):
+                print("----",url)
+                if(re.match('//ty.netease.com/forum-\d+-\d+.html$',url) is not None):
                     url_new = "http:"+url
-                if(re.match('/forum-\d-\d.html$',url) is not None):
+                if(re.match('/forum-\d+-\d+.html$',url) is not None):
                     url_new = "http://ty.netease.com"+url
-                if(re.match('//ty.netease.com/thread-\d-\d-\d.html$',url) is not None):
+                if(re.match('//ty.netease.com/thread-\d+-\d+-\d+.html$',url) is not None):
                     url_new = "http:"+url
-                if(re.match('/thread-\d-\d-\d.html$',url) is not None):
+                if(re.match('/thread-\d+-\d+-\d+.html$',url) is not None):
                     url_new = "http://ty.netease.com"+url
                 if(url_new!=''):
-                    #print(url_new)
+                    print("++++",url_new)
                     yield scrapy.Request(url_new, self.parse)
 
-        if(re.match('http://ty.netease.com/thread-\d-\d-\d.html$',url) is not None):
+        if(re.match('http://ty.netease.com/thread-\d+-\d+-\d+.html$',url) is not None):
             print("return")
             return
             item = BbsspiderItem()

@@ -27,6 +27,7 @@ MYSQL_PORT = 3306               #数据库端口，在dbhelper中使用
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+DOWNLOAD_DELAY = 1.5
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
